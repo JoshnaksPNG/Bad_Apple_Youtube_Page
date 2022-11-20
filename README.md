@@ -7,15 +7,14 @@ This is truly a certified Bad Apple moment.
 
 ## 1 - Preparing the files
 
- 1. Download the latest version of Node.js, if you haven't already
-    (https://nodejs.org/en/download/)
+ 1. [Download the latest version of Node.js](https://nodejs.org/en/download/), if you haven't already
  2. Clone the project, by preferred choice (If downloading a ZIP from the GitHub website, make sure to extract it)
  3. If on Windows, shift + right-click in an empty spot in File Explorer (where there aren't any files), and then select "Open PowerShell window here".
 	 - If the option to do so is not shown, use Win + R and type `cmd`. Press enter or OK to run. You'll then want to navigate to the folder you cloned the project to using `cd FILEPATH`, replacing FILEPATH with where you cloned the project.
  4. Run `npm i`. This will install all required Node modules. This may take a little while, but usually under 30 seconds.
  5. Run `node .` This will run index.js, generating and splitting all 6955 frames. This may take anywhere from 20 to 2 hours, depending on your system. Once it's done though, it should tell you and exit the process. **Be patient and DO NOT CLOSE POWERSHELL. If the process is interrupted, there is NO WAY to skip the frames you've already processed.** Minimizing it is fine though.
 	 - If you think it's been a hot second and should probably be done, check ./frame_output/frame_parts. If the last folder is under 6955, it is not done. If it is 6955, you can safely hit CTRL+C in PowerShell to exit.
- 6. Once your frames are all generated, open the YouTube homepage. If your Shorts shelf hasn't been hidden, hit that X to close it. (It won't work as intended if it's there.) You'll then want to hit CTRL+S to save the webpage as **"Webpage, Complete." Save it in the same location you cloned the project.**
+ 6. Once your frames are all generated, open the YouTube homepage. If your Shorts shelf hasn't been hidden, hit that X to close it. (It won't work as intended if it's there.) You'll then want to hit CTRL + S to save the webpage as **"Webpage, Complete." Save it in the same location you cloned the project.**
 
 You now have the files. Here comes the fun part...
 
