@@ -4,6 +4,7 @@ const ffmpeg = require("ffmpeg");
 const fs = require("fs");
 const Jimp = require("jimp");
 const lodash = require("lodash");
+const cliProgress = require('cli-progress');
 
 // Frame Intervals
 const EVERY_N_FRAME_SET = 1;
@@ -19,6 +20,8 @@ const CHANNEL_HEIGHT = 36;
 const HORIZONTAL_MARGIN = 16;
 const VERTICAL_MARGIN = 86;
 const VERTICAL_MINOR = 12;
+
+console.log("Extracting frames... (This should only take a minute or two.)")
 
 // Extract Video To JPG frames (Stole from Stack Overflow :D)
 try {
@@ -42,6 +45,12 @@ catch (e)
 
 async function resized_frames(error, files)
 {
+    console.log("Resizing frames... (This may take a very, very long time.)")
+
+    // Create a progress bar
+    const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+    bar.start(6955, 0);
+
     // Get Number of Frames
     let total_frames = files.length;
 
@@ -85,6 +94,7 @@ async function resized_frames(error, files)
                 ).write(channel_path);
             }
         }
+        bar.increment()
     }
 
     // Tell the user that it's done
