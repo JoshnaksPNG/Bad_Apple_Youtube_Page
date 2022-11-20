@@ -1,4 +1,3 @@
-
 # Play Bad Apple...on your YouTube Homepage
 
 This is truly a certified Bad Apple moment.
@@ -32,8 +31,8 @@ This is truly a certified Bad Apple moment.
 	 - For Mac, navigate to the folder in Finder. If you can't see the path bar at the bottom of it, go to View > Show Path Bar. CTRL + Left-click the folder in the path bar, and then choose "Open in Terminal."
 	 - For Ubuntu, and similarly for all other distros, right click in an empty file explorer space and click "Open in Terminal." If you can't find this, use CTRL + Alt + T. Use `cd` to direct yourself to the folder.
  4. Run `npm i`. This will install all required Node modules. This may take a little while, but usually under 30 seconds.
- 5. Run `node .` This will run index.js, generating and splitting all 6955 frames. This may take anywhere from 20 to 2 hours, depending on your system. Once it's done though, it should tell you and exit the process. **Be patient and DO NOT CLOSE POWERSHELL. If the process is interrupted, there is NO WAY to skip the frames you've already processed.** Minimizing it is fine though.
-	 - If you think it's been a hot second and should probably be done, check ./frame_output/frame_parts. If the last folder is under 6955, it is not done. If it is 6955, you can safely hit CTRL+C in PowerShell to exit.
+ 5. Run `node .` This will run index.js, generating and splitting all 6955 frames. This may take anywhere from 20 to 2 hours, depending on your system. Once it's done though, it should tell you and exit the process. **Be patient and DO NOT CLOSE TERMINAL. If the process is interrupted, there is NO WAY to skip the frames you've already processed.** Minimizing it is fine though.
+	 - If you think it's been a hot second and should probably be done, check ./frame_output/frame_parts. If the last folder is under 6955, it is not done. If it is 6955, you can safely just exit Terminal.
  6. Once your frames are all generated, open the YouTube homepage. If your Shorts shelf hasn't been hidden, hit that X to close it. (It won't work as intended if it's there.) You'll then want to hit CTRL + S to save the webpage as **"Webpage, Complete." Save it in the same location you cloned the project.**
 	 - If CTRL + S doesn't work in your browser for some reason, try finding a File menu to use File > Save as. Right clicking in an empty space on a webpage may also bring up an option to save it.
 7. [Proceed to Section 2.](#two)
