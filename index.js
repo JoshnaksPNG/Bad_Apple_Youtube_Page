@@ -4,10 +4,7 @@ const ffmpeg = require("ffmpeg");
 const fs = require("fs");
 const Jimp = require("jimp");
 const lodash = require("lodash");
-const path = require("path");
-
-// Read Config Path
-const CONFIG_PATH = JSON.parse(fs.readFileSync("config.json")).project_path;
+const cliProgress = require('cli-progress');
 
 // Frame Intervals
 const EVERY_N_FRAME_SET = 1;
@@ -24,12 +21,14 @@ const HORIZONTAL_MARGIN = 16;
 const VERTICAL_MARGIN = 86;
 const VERTICAL_MINOR = 12;
 
+console.log("Extracting frames... (This should only take a minute or two.)")
+
 // Extract Video To JPG frames (Stole from Stack Overflow :D)
 try {
     let process = new ffmpeg("video_input/input.mp4");
     process.then( (video) =>
     {
-        video.fnExtractFrameToJPG( project_path + "/frame_output/whole_frames", 
+        video.fnExtractFrameToJPG("./frame_output/whole_frames", 
         {
             every_n_frames : EVERY_N_FRAME_SET
         }, resized_frames)
@@ -46,6 +45,12 @@ catch (e)
 
 async function resized_frames(error, files)
 {
+    console.log("Resizing frames... (This may take a very, very long time.)")
+
+    // Create a progress bar
+    const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+    bar.start(6955, 0);
+
     // Get Number of Frames
     let total_frames = files.length;
 
@@ -55,8 +60,8 @@ async function resized_frames(error, files)
 
     for(let i = 1; !(i > total_frames); ++i)
     {
-        const in_path = project_path + "/frame_output/whole_frames/input_" + i + ".jpg";
-        const out_path = project_path + "/frame_output/resized_frames/frame_" + i + ".jpg";
+        const in_path = "./frame_output/whole_frames/input_" + i + ".jpg";
+        const out_path = "./frame_output/resized_frames/frame_" + i + ".jpg";
         const img = await Jimp.read(in_path);
 
         img.resize(PIXEL_WIDTH, PIXEL_HEIGHT);
@@ -65,7 +70,7 @@ async function resized_frames(error, files)
         {
             for(let k = 0; k < vid_y; ++k)
             {
-                const sliced_out_path = project_path + "/frame_output/frame_parts/" + i + "";
+                const sliced_out_path = "./frame_output/frame_parts/" + i + "";
                 const thumb_path = sliced_out_path + "/" + k + "," + j + "thumb.jpg";
                 const channel_path = sliced_out_path + "/" + k + "," + j +"channel.jpg";
 
@@ -89,7 +94,11 @@ async function resized_frames(error, files)
                 ).write(channel_path);
             }
         }
+        bar.increment()
     }
 
+    // Tell the user that it's done
+    console.log("Completed!")
+    process.exit()
 
 }
