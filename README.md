@@ -49,9 +49,10 @@ You can skip this step if you:
 - Can't find an extension for your browser anywhere online
 - Know for a fact that CORS is not an issue in your browser
 
-[For Firefox](#firefox)
-[For Chrome](#chrome)
-[For Safari](#safari)
+#### Browsers:
+- [For Firefox](#firefox)
+- [For Chrome](#chrome)
+- [For Safari](#safari)
 
 ### Firefox
 [Install the CORS Everywhere extension](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/). Congratulations, you're done.
