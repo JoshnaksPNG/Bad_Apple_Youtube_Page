@@ -29,7 +29,7 @@ try {
     let process = new ffmpeg("video_input/input.mp4");
     process.then( (video) =>
     {
-        video.fnExtractFrameToJPG( project_path + "/frame_output/whole_frames", 
+        video.fnExtractFrameToJPG( CONFIG_PATH + "/frame_output/whole_frames", 
         {
             every_n_frames : EVERY_N_FRAME_SET
         }, resized_frames)
@@ -55,8 +55,8 @@ async function resized_frames(error, files)
 
     for(let i = 1; !(i > total_frames); ++i)
     {
-        const in_path = project_path + "/frame_output/whole_frames/input_" + i + ".jpg";
-        const out_path = project_path + "/frame_output/resized_frames/frame_" + i + ".jpg";
+        const in_path = CONFIG_PATH + "/frame_output/whole_frames/input_" + i + ".jpg";
+        const out_path = CONFIG_PATH + "/frame_output/resized_frames/frame_" + i + ".jpg";
         const img = await Jimp.read(in_path);
 
         img.resize(PIXEL_WIDTH, PIXEL_HEIGHT);
@@ -65,7 +65,7 @@ async function resized_frames(error, files)
         {
             for(let k = 0; k < vid_y; ++k)
             {
-                const sliced_out_path = project_path + "/frame_output/frame_parts/" + i + "";
+                const sliced_out_path = CONFIG_PATH + "/frame_output/frame_parts/" + i + "";
                 const thumb_path = sliced_out_path + "/" + k + "," + j + "thumb.jpg";
                 const channel_path = sliced_out_path + "/" + k + "," + j +"channel.jpg";
 
