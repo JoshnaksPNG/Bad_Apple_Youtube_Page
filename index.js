@@ -7,7 +7,9 @@ const lodash = require("lodash");
 const path = require("path");
 
 // Read Config Path
-const CONFIG_PATH = JSON.parse(fs.readFileSync("config.json")).project_path;
+const CONFIG = JSON.parse(fs.readFileSync("config.json"))
+const CONFIG_PATH = CONFIG.project_path;
+const VIDEO_IN = CONFIG.input_video;
 
 // Frame Intervals
 const EVERY_N_FRAME_SET = 1;
@@ -26,7 +28,7 @@ const VERTICAL_MINOR = 12;
 
 // Extract Video To JPG frames (Stole from Stack Overflow :D)
 try {
-    let process = new ffmpeg("video_input/input.mp4");
+    let process = new ffmpeg("video_input/" + VIDEO_IN);
     process.then( (video) =>
     {
         video.fnExtractFrameToJPG( CONFIG_PATH + "/frame_output/whole_frames", 
