@@ -14,8 +14,6 @@ const imgs = document.querySelectorAll(".yt-img-shadow");
 
 const FILE_PATH = "file://" + "C:/git/Bad_Apple_Youtube_Page";
 
-//update_frame();
-
 setInterval(play_video, FRAME_INTERVAL);
 
 function update_frame()
@@ -27,7 +25,7 @@ function update_frame()
             const channel_path =  FILE_PATH + "/frame_output/frame_parts/" + (frame + 1) + "/" + j + "," + i + "channel.jpg";
             const thumbnail_path = FILE_PATH + "/frame_output/frame_parts/" + (frame + 1) + "/" + j + "," + i + "thumb.jpg";
         
-            const index = (j * VID_X) + i + 0; //console.log(thumbnail_path);
+            const index = (j * VID_X) + i + 0; 
             imgs[(index * 2) + 1].src = thumbnail_path; 
             imgs[(index * 2) + 2].src = channel_path;
         }

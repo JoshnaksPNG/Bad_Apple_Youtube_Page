@@ -13,7 +13,7 @@ Setup
 Running The Program
 ------------------
 
-1. Place the input video in the "video_input" folder.
+1. Place the input video in the "video_input" folder and change the video_input in "config.json".
 2. Run "node ." in cmd to generate the frames. This'll probably take a while.
 3. Download a YouTube homepage, it should have 4x3 thumbnails on the page.
 4. Copy the code from "play.js" and run it in the dev console on the page
