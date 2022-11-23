@@ -92,6 +92,4 @@ async function resized_frames(error, files)
             }
         }
     }
-
-
 }
