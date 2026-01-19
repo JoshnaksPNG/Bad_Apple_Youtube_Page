@@ -29,3 +29,6 @@ The included fonts (Roboto, Material Icons) are licensed under their respective 
 - Roboto: [OFL 1.1](youtube_clone/styles/Roboto/LICENSE)
 - Material Icons: [Apache License 2.0](youtube_clone/styles/Material/LICENSE)
 
+Trademark notice
+----------
+The YouTube logo is a trademark of Google LLC. It is used here for educational / demonstrational purposes only. Google LLC is not affiliated with or endorses this project.
