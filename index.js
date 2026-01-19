@@ -80,7 +80,8 @@ async function processFrame(frameFile) {
 
             // Channel
             const channelX = j * (THUMBNAIL_WIDTH + HORIZONTAL_MARGIN);
-            const channelY = VERTICAL_MINOR + ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * k);
+            const channelY = (THUMBNAIL_HEIGHT + VERTICAL_MINOR) +
+                ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * k);
             const channelPath = path.join(framePartDir, `${k},${j}channel.jpg`);
 
             await image.clone()
