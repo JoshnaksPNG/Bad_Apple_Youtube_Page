@@ -1,1 +1,0 @@
-Folder Where the Script Places The Frames of the Input Video
