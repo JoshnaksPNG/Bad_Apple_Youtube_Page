@@ -1,0 +1,300 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header section*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding: 15px;
+}
+
+/* Main contant section */
+main {
+  flex: 1;
+  display: flex;
+  background-color: #f9f9f9;
+}
+
+/* Sidebar */
+.side-bar {
+  height: 100%;
+  width: 17%;
+  background-color: white;
+  overflow-y: hidden;
+}
+
+/* Left section of header */
+.left,
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  padding: 0 7px;
+  margin-right: 16px;
+}
+
+/* Search */
+.search {
+  display: flex;
+}
+
+.search form {
+  display: flex;
+  border: 1px solid #ddd;
+  height: 35px;
+}
+
+.search input {
+  width: 600px;
+  padding: 10px;
+  border: 0;
+  height: 100%;
+  border-radius: 2px 0 0 2px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #ddd;
+}
+
+.search button {
+  display: flex;
+  height: 100%;
+  width: 60px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-icon {
+  margin: auto;
+  align-self: center;
+}
+
+.mic {
+  margin: auto;
+}
+
+/* Right section with icons */
+.right {
+  display: flex;
+}
+
+.material-icons {
+  color: rgb(96, 96, 96);
+  padding: 0 7px;
+  cursor: pointer;
+}
+
+/* Sidebar's navlinks */
+.nav-link.active i {
+  color: red;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.nav-link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 15px;
+
+  padding: 12px 25px;
+}
+
+@media (max-width: 1200px) {
+  .nav-link {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    text-align: center;
+    gap: 0px;
+  }
+}
+
+.nav-link span {
+  font-size: 14px;
+  color: rgb(3, 3, 3);
+}
+
+.nav-link.active span {
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.nav-link.active {
+  background: rgba(0, 0, 0, .1);
+}
+
+hr {
+  height: 1px;
+  background-color: #e5e5e5;
+  border: none;
+}
+
+/* Content */
+.content {
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 100%;
+  padding: 15px 15px;
+  border-top: 1px solid #ddd;
+}
+
+.videos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.video {
+  margin: 10px;
+  width: 270px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 170px;
+}
+
+.thumbnail-img {
+  object-fit: cover;
+  height: 94%;
+  width: 100%;
+}
+
+.author-img {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  margin-right: 10px;
+}
+
+.details {
+  display: flex;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.title h3 {
+  color: rgb(3, 3, 3);
+  line-height: 14px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.title a {
+  text-decoration: none;
+  color: rgb(3, 3, 3);
+}
+
+.title div a,
+.title span {
+  color: rgb(96, 96, 96);
+}
+
+.title div a:hover {
+  color: rgb(3, 3, 3);
+}
+
+/* Adaptability */
+@media (max-width: 550px) {
+  .side-bar {
+    display: none;
+  }
+
+  .search input {
+    display: none;
+  }
+
+  .search {
+    flex-grow: 1;
+  }
+
+  .search form {
+    flex-grow: 1;
+    justify-content: end;
+    border: none;
+  }
+
+  .search button {
+    background: none;
+    width: auto;
+  }
+
+  .search .mic {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 650px) {
+  .side-bar {
+    display: none;
+  }
+
+  .search input {
+    width: 5rem;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 700px) {
+  .side-bar {
+    display: none;
+  }
+
+  .search input {
+    width: 10rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .side-bar {
+    display: none;
+  }
+
+  .search input {
+    width: 15rem;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1100px) {
+  .search input {
+    width: 25rem;
+  }
+}

@@ -1,0 +1,423 @@
+<!-- Created based on 
+ https://www.freecodecamp.org/news/how-to-build-a-website-with-html-and-css-step-by-step/ -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="styles/fonts.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+
+  <title>Youtube Clone with HTML & CSS</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="left">
+      <i class="material-icons menu">menu</i>
+      <a href="?" title="YouTube Home">
+        <div class="logo">
+          <img src="images/logo.png">
+        </div>
+      </a>
+    </div>
+
+    <div class="search center">
+      <form action="">
+        <input type="text" placeholder="Search" id="search" name="search" />
+        <button title="Search"><i class="material-icons search-icon">search</i></button>
+      </form>
+      <i class="material-icons mic" title="Voice input">mic</i>
+    </div>
+
+    <div class="icons right">
+      <i class="material-icons" title="Upload video">videocam</i>
+      <i class="material-icons" title="YouTube apps">apps</i>
+      <i class="material-icons" title="Notifications">notifications</i>
+      <i class="material-icons display-this" title="Account">account_circle</i>
+    </div>
+  </header>
+  <main>
+    <div class="side-bar">
+      <div class="nav">
+        <a class="nav-link active" title="Home">
+          <i class="material-icons">home</i>
+          <span>Home</span>
+        </a>
+        <a class="nav-link" title="Trending">
+          <i class="material-icons">local_fire_department</i>
+          <span>Trending</span>
+        </a>
+        <a class="nav-link" title="Subscriptions">
+          <i class="material-icons">subscriptions</i>
+          <span>Subscriptions</span>
+        </a>
+      </div>
+      <hr>
+      <a class="nav-link" title="Library">
+        <i class="material-icons">library_add_check</i>
+        <span>Library</span>
+      </a>
+      <a class="nav-link" title="History">
+        <i class="material-icons">history</i>
+        <span>History</span>
+      </a>
+      <a class="nav-link" title="Your Videos">
+        <i class="material-icons">play_arrow</i>
+        <span>Your Videos</span>
+      </a>
+      <a class="nav-link" title="Watch Later">
+        <i class="material-icons">watch_later</i>
+        <span>Watch Later</span>
+      </a>
+      <a class="nav-link" title="Liked Videos">
+        <i class="material-icons">thumb_up</i>
+        <span>Liked Videos</span>
+      </a>
+    </div>
+    <div class="content">
+      <div class="videos">
+
+        <!-- first row -->
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- second row -->
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- third row -->
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+        <div class="video">
+          <div class="thumbnail">
+            <a href="#video">
+              <img class="thumbnail-img" src="images/thumbnail.jpg" alt="" />
+            </a>
+          </div>
+          <div class="details">
+            <div>
+              <a href="#author" title="DmitrMarch">
+                <img class="author-img" src="images/author.jpg" alt="" />
+              </a>
+            </div>
+            <div class="title">
+              <h3>
+                <a href="#video" title="Bad Apple | part of frame">
+                  Bad Apple | part of frame
+                </a>
+              </h3>
+              <div>
+                <a href="#author" title="DmitrMarch">
+                  DmitrMarch
+                </a>
+              </div>
+              <span> 0 Views • Just now </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="play.js"></script>
+</body>
+
+</html>
