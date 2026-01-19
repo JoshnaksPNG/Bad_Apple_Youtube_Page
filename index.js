@@ -1,20 +1,15 @@
-// Libraries
-const jimp = require("jimp");
-const ffmpeg = require("ffmpeg");
 const fs = require("fs");
-const Jimp = require("jimp");
-const lodash = require("lodash");
 const path = require("path");
+const { exec } = require("child_process");
+const sharp = require("sharp");
+const os = require("os");
 
-// Read Config Path
-const CONFIG = JSON.parse(fs.readFileSync("config.json"))
-const CONFIG_PATH = CONFIG.project_path;
+const CONFIG = JSON.parse(fs.readFileSync("config.json"));
 const VIDEO_IN = CONFIG.input_video;
 
-// Frame Intervals
 const EVERY_N_FRAME_SET = 1;
-const vid_x = 4;
-const vid_y = 3;
+const VID_X = 4;
+const VID_Y = 3;
 
 const THUMBNAIL_WIDTH = 281;
 const THUMBNAIL_HEIGHT = 158;
@@ -26,70 +21,110 @@ const HORIZONTAL_MARGIN = 16;
 const VERTICAL_MARGIN = 86;
 const VERTICAL_MINOR = 12;
 
-// Extract Video To JPG frames (Stole from Stack Overflow :D)
-try {
-    let process = new ffmpeg("video_input/" + VIDEO_IN);
-    process.then( (video) =>
-    {
-        video.fnExtractFrameToJPG( CONFIG_PATH + "/frame_output/whole_frames", 
-        {
-            every_n_frames : EVERY_N_FRAME_SET
-        }, resized_frames)
-    }, function (err) 
-    {
-        console.log('Error: ' + err);
+// Main directories
+const WHOLE_FRAMES_DIR = "frame_output/whole_frames";
+const FRAME_PARTS_DIR = "frame_output/frame_parts";
+
+// Create directories if they don't exist
+[WHOLE_FRAMES_DIR, FRAME_PARTS_DIR].forEach(dir => {
+
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+});
+
+// Resize params
+const PIXEL_WIDTH = (HORIZONTAL_MARGIN * (VID_X - 1)) + (THUMBNAIL_WIDTH * VID_X);
+const PIXEL_HEIGHT = (VERTICAL_MARGIN * (VID_Y - 1)) + ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * VID_Y);
+
+/** Get whole scaled frames from a video */
+function extractFrames() {
+
+    return new Promise((resolve, reject) => {
+
+        const cmd = `ffmpeg -i "${path.join("video_input", VIDEO_IN)}" \
+-q:v 2 \
+-vf "select=not(mod(n\\,${EVERY_N_FRAME_SET})),scale=${PIXEL_WIDTH}:${PIXEL_HEIGHT}" \
+"${path.join(WHOLE_FRAMES_DIR, "input_%d.jpg")}"`;
+
+        exec(cmd, (err) => {
+
+            if (err) reject(err);
+            else resolve();
+        });
     });
-} 
-catch (e) 
-{
-    console.log(e.code);
-    console.log(e.msg);
 }
 
-async function resized_frames(error, files)
-{
-    // Get Number of Frames
-    let total_frames = files.length;
+/** Crop the frame into 24 parts */
+async function processFrame(frameFile) {
 
-    // Resize Frames
-    const PIXEL_WIDTH = (HORIZONTAL_MARGIN * (vid_x - 1)) + (THUMBNAIL_WIDTH * vid_x);
-    const PIXEL_HEIGHT = (VERTICAL_MARGIN * (vid_y - 1)) + ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * vid_y);
+    const match = path.basename(frameFile).match(/input_(\d+)\.jpg/);
+    const frameIndex = match[1];
 
-    for(let i = 1; !(i > total_frames); ++i)
-    {
-        const in_path = CONFIG_PATH + "/frame_output/whole_frames/input_" + i + ".jpg";
-        const out_path = CONFIG_PATH + "/frame_output/resized_frames/frame_" + i + ".jpg";
-        const img = await Jimp.read(in_path);
+    const framePartDir = path.join(FRAME_PARTS_DIR, frameIndex);
 
-        img.resize(PIXEL_WIDTH, PIXEL_HEIGHT);
+    if (!fs.existsSync(framePartDir)) fs.mkdirSync(framePartDir, { recursive: true });
 
-        for(let j = 0; j < vid_x; ++j)
-        {
-            for(let k = 0; k < vid_y; ++k)
-            {
-                const sliced_out_path = CONFIG_PATH + "/frame_output/frame_parts/" + i + "";
-                const thumb_path = sliced_out_path + "/" + k + "," + j + "thumb.jpg";
-                const channel_path = sliced_out_path + "/" + k + "," + j +"channel.jpg";
+    const image = sharp(frameFile);
 
-                
-                const timg = lodash.cloneDeep(img);
-                const cimg = lodash.cloneDeep(img);
-                timg.crop
-                (
-                    (j * (THUMBNAIL_WIDTH + HORIZONTAL_MARGIN)),
-                    (k * (THUMBNAIL_HEIGHT + VERTICAL_MARGIN)),
-                    THUMBNAIL_WIDTH,
-                    THUMBNAIL_HEIGHT
-                ).write(thumb_path);
+    for (let j = 0; j < VID_X; j++) {
 
-                cimg.crop
-                (
-                    (j * (THUMBNAIL_WIDTH + HORIZONTAL_MARGIN)),
-                    ((THUMBNAIL_HEIGHT + VERTICAL_MINOR) + ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * k)),
-                    CHANNEL_WIDTH,
-                    CHANNEL_HEIGHT
-                ).write(channel_path);
-            }
+        for (let k = 0; k < VID_Y; k++) {
+
+            // Thumbnail
+            const thumbX = j * (THUMBNAIL_WIDTH + HORIZONTAL_MARGIN);
+            const thumbY = k * (THUMBNAIL_HEIGHT + VERTICAL_MARGIN);
+            const thumbPath = path.join(framePartDir, `${k},${j}thumb.jpg`);
+
+            await image.clone()
+                .extract({ left: thumbX, top: thumbY, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT })
+                .toFile(thumbPath);
+
+            // Channel
+            const channelX = j * (THUMBNAIL_WIDTH + HORIZONTAL_MARGIN);
+            const channelY = VERTICAL_MINOR + ((THUMBNAIL_HEIGHT + VERTICAL_MARGIN) * k);
+            const channelPath = path.join(framePartDir, `${k},${j}channel.jpg`);
+
+            await image.clone()
+                .extract({ left: channelX, top: channelY, width: CHANNEL_WIDTH, height: CHANNEL_HEIGHT })
+                .toFile(channelPath);
         }
     }
 }
+
+/** Parallel processing of all frames */
+async function processAllFrames() {
+
+    const files = fs.readdirSync(WHOLE_FRAMES_DIR).filter(f => f.endsWith(".jpg"));
+    const concurrency = os.cpus().length;
+    let index = 0;
+
+    async function worker() {
+
+        while (index < files.length) {
+
+            const file = path.join(WHOLE_FRAMES_DIR, files[index++]);
+            await processFrame(file);
+        }
+    }
+
+    const workers = [];
+
+    for (let i = 0; i < concurrency; i++) workers.push(worker());
+    await Promise.all(workers);
+}
+
+// Main start
+(async () => {
+
+    try {
+
+        console.log("Extracting frames (resized)...");
+        await extractFrames();
+        console.log("Frames extracted. Processing tiles...");
+        await processAllFrames();
+        console.log("All frames processed successfully!");
+    }
+    catch (err) {
+
+        console.error("Error:", err);
+    }
+})();
